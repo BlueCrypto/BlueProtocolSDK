@@ -1,0 +1,91 @@
+/**
+ * The BlueProtocolSdk class. Provides methods for interacting with the Blue
+ * Protocol Sdk.
+ */
+class BlueProtocolSdk {
+    /**
+     * Constructor for the BlueProtocolSdk class.
+     * @param {string} apiKey - Your BlueProtocol SDK api key
+     * @param {string} network - (optional) defaults mainnet [rinkeby, ropsten]
+     * @example
+     * const blueSdk = new BlueProtocolSdk(YOUR_API_KEY);
+     */
+    constructor(apiKey, network = 'mainnet') {
+        this.apiKey = apiKey;
+        this.network = network;
+    }
+    // ------------------------------------------------------------------------>
+    /**
+     * The result of a call to the scanLists method.
+     * @typedef {Object} ListResult
+     * @property {string} result - The result ['blocked', 'neutral', 'whitelisted']
+     * @property {Array.<ListResultEntry>} entries - The entries related to the
+     * given address.
+     */
+    /**
+     * An entry within the ListResult entries property.
+     * @typedef {Object} ListResultEntry
+     * @property {number} id
+     * @property {string} name
+     * @property {string} category
+     * @property {string} subcategory
+     * @property {string} description
+     * @property {string} status - ['online', 'offline']
+     * @property {string[]} addresses - addresses involved to entry
+     */
+    /**
+     * Checks against a number of of community and Blue-maintained black and
+     * whitelists which identify known attackers, and verified recipients of
+     * funds and returns the results.
+     *
+     * @param {string} address - The address you wish to check. Can be a public
+     *                           address of an account or a contract.
+     * @example
+     * blueSdk.scanLists('0x83D217450eB96F6247ff49d148409d4fEAf0405F')
+     * .then(result => {
+     *     console.log(result)
+     * })
+     * .catch(err => {
+     *     console.error(err)
+     * })
+     * @return {Promise.<ListResult>}
+     */
+    scanLists(address) {
+        return new Promise();
+    }
+    // ------------------------------------------------------------------------>
+    /**
+     * The result of a call to the analyzeContract method.
+     * @typedef {Object} AnalysisResult
+     * @property {number} score - The weighted score
+     * @property {Array.<AnalysisResultEntry>} entries - The scan results
+     */
+    /**
+     * An entry within the AnalysisResult entries property.
+     * @typedef {Object} AnalysisResultEntry
+     * @property {string} title
+     * @property {string} description
+     * @property {string} function - function hash
+     * @property {string} type - ['Informational', 'Warning']
+     * @property {string} debug - Additional information related to entry
+     */
+    /**
+     * A number of analyzers are run against the given contract's
+     *
+     * @param {string} address - The address of the contract you wish to analyze
+     * @example
+     * blueSdk.analyzeContract('0x83D217450eB96F6247ff49d148409d4fEAf0405F')
+     * .then(result => {
+     *     console.log(result)
+     * })
+     * .catch(err => {
+     *     console.error(err)
+     * })
+     * @return {Promise.<AnalysisResult>}
+     */
+    analyzeContract(address) {
+        return new Promise();
+    }
+}
+
+export default BlueProtocolSdk;

@@ -1,0 +1,24 @@
+{
+  "name": "blueprotocolsdk",
+  "version": "0.0.1",
+  "description": "A wrapper library that provides methods for interacting with the Blue Protocol SDK.",
+  "main": "src/index.js",
+  "scripts": {
+    "build": "webpack"
+  },
+  "keywords": [
+    "blue",
+    "protocol",
+    "blueprotocol",
+    "sdk"
+  ],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "babel-loader": "^7.1.4",
+    "eslint": "^4.19.1",
+    "eslint-config-google": "^0.9.1",
+    "webpack": "^4.9.1",
+    "webpack-cli": "^2.1.4"
+  }
+}
