@@ -1,6 +1,4 @@
-'use strict';
-
-import {ResourceManager} from './ResourceManager';
+import ResourceManager from './ResourceManager';
 /**
  * The BlueProtocolSdk class. Provides methods for interacting with the Blue
  * Protocol Sdk.

@@ -1,5 +1,3 @@
-'use strict';
-
 const RESOURCES_URL = 'https://s3-us-west-2.amazonaws.com/blue-protocol-sdk/config/resources.json';
 const SESSION_STORAGE_KEY = 'blue-sdk-resources';
 

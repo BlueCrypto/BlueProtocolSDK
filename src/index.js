@@ -1,4 +1,2 @@
-'use strict';
-
-import {BlueProtocolSdk} from './BlueProtocolSdk';
+import BlueProtocolSdk from './BlueProtocolSdk';
 export default BlueProtocolSdk;

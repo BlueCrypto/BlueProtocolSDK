@@ -1,4 +1,3 @@
-'use strict';
 import ResourceManager from '../src/ResourceManager';
 
 // import {expect} from 'chai';
