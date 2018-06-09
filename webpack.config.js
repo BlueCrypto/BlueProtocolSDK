@@ -3,21 +3,22 @@ const webpack = require('webpack');
 const path = require('path');
 
 module.exports = {
-    devtool: 'inline-sourcemap',
     context: __dirname,
     entry: './src/index.js',
     output: {
         path: path.resolve(__dirname, 'dist'),
-        filename: 'bundle.js'
+        filename: 'bundle.js',
+        library: 'BlueProtocolSdk',
+        libraryTarget: 'umd2',
+        umdNamedDefine: true
     },
     module: {
         rules: [
             {
                 test: /\.js$/,
                 exclude: /node_modules/,
-                loader: 'babel-loader',
-                query: {
-                    presets: ['es2015']
+                use: {
+                    loader: 'babel-loader',
                 }
             }
         ]

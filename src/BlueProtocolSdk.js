@@ -1,3 +1,6 @@
+'use strict';
+
+import {ResourceManager} from './ResourceManager';
 /**
  * The BlueProtocolSdk class. Provides methods for interacting with the Blue
  * Protocol Sdk.
@@ -50,8 +53,9 @@ class BlueProtocolSdk {
      * })
      * @return {Promise.<ListResult>}
      */
-    scanLists(address) {
-        return new Promise();
+    async scanLists(address) {
+        const scanlistsUrl = ResourceManager.get('scanlists');
+        return fetch(scanlistsUrl + address);
     }
     // ------------------------------------------------------------------------>
     /**

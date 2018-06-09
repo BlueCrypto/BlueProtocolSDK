@@ -5,9 +5,7 @@ module.exports = {
       sourceType: 'module',
     },
     env: {
-      es6: true,
-      node: true,
-      commonjs: true
+      node: false,
     },
     rules: {
       'comma-dangle': ['error', 'never'],
