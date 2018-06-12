@@ -1,4 +1,4 @@
-import ResourceManager from './ResourceManager';
+import {objResourceManager} from './ResourceManager';
 /**
  * The BlueProtocolSdk class. Provides methods for interacting with the Blue
  * Protocol Sdk.
@@ -52,14 +52,15 @@ class BlueProtocolSdk {
      * @return {Promise.<ListResult>}
      */
     async scanLists(address) {
-        const scanlistsUrl = ResourceManager.get('scanlists');
-        return fetch(scanlistsUrl + address);
+        const scanlistsUrl = await objResourceManager.getResource('scanlists');
+        const response = await fetch(scanlistsUrl + address);
+        return await response.json();
     }
     // ------------------------------------------------------------------------>
     /**
      * The result of a call to the analyzeContract method.
      * @typedef {Object} AnalysisResult
-     * @property {number} score - The weighted score
+     * @property {number} scan_status - [in_progress, complete]
      * @property {Array.<AnalysisResultEntry>} entries - The scan results
      */
     /**
@@ -72,7 +73,7 @@ class BlueProtocolSdk {
      * @property {string} debug - Additional information related to entry
      */
     /**
-     * A number of analyzers are run against the given contract's
+     * A number of analyzers are run against the given contract
      *
      * @param {string} address - The address of the contract you wish to analyze
      * @example
@@ -85,9 +86,11 @@ class BlueProtocolSdk {
      * })
      * @return {Promise.<AnalysisResult>}
      */
-    analyzeContract(address) {
-        return new Promise();
+    async analyzeContract(address) {
+        const analyzecontractUrl = await objResourceManager.getResource('analyzecontract');
+        const response = await fetch(analyzecontractUrl + address);
+        return await response.json();
     }
 }
 
-export default BlueProtocolSdk;
+module.exports = BlueProtocolSdk;

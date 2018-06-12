@@ -1,4 +1,4 @@
-const RESOURCES_URL = 'https://s3-us-west-2.amazonaws.com/blue-protocol-sdk/config/resources.json';
+const RESOURCES_URL = 'https://s3-us-west-2.amazonaws.com/blue-protocol-sdk/resources.json';
 const SESSION_STORAGE_KEY = 'blue-sdk-resources';
 
 /**
@@ -16,15 +16,18 @@ class ResourceManager {
      * Attempts to retrieve resources from sessionStorage then remote host.
      */
     async _setResources() {
-        let resourcesJson = sessionStorage.getItem(SESSION_STORAGE_KEY);
-        if (resourcesJson === null && this.fetchedResources === false) {
-            resourcesJson = await fetch(RESOURCES_URL);
-            sessionStorage.setItem(resourcesJson);
+        let resources = sessionStorage.getItem(SESSION_STORAGE_KEY);
+        if (resources === null && this.fetchedResources === false) {
+            const resourceResponse = await fetch(RESOURCES_URL);
+            resources = await resourceResponse.json();
+            sessionStorage.setItem(SESSION_STORAGE_KEY, JSON.stringify(resources));
             this.fetchedResources = true;
-        } else if (resourcesJson === null && this.fetchedResources !== false) {
+        } else if (resources === null && this.fetchedResources !== false) {
             throw new Error('Unable to fetch resources');
+        } else {
+            resources = JSON.parse(resources);
         }
-        this.resources = JSON.parse(resourcesJson);
+        this.resources = resources;
     }
     /**
      * Retrieves the remote path to the requested resource.
@@ -35,13 +38,12 @@ class ResourceManager {
         if (this.resources == null) {
             await this._setResources();
         }
-
-        if (this.resources.hasOwnProperty(key) !== true) {
+        if (this.resources.endpoints.hasOwnProperty(key) !== true) {
             throw new Error('Unknown resource requested');
         }
 
-        return this.resources[key];
+        return this.resources.endpoints[key];
     }
 }
 
-export default new ResourceManager();
+export let objResourceManager = new ResourceManager();

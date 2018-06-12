@@ -1,14 +1,5 @@
-(function webpackUniversalModuleDefinition(root, factory) {
-	if(typeof exports === 'object' && typeof module === 'object')
-		module.exports = factory();
-	else if(typeof define === 'function' && define.amd)
-		define("BlueProtocolSdk", [], factory);
-	else if(typeof exports === 'object')
-		exports["BlueProtocolSdk"] = factory();
-	else
-		root["BlueProtocolSdk"] = factory();
-})(typeof self !== 'undefined' ? self : this, function() {
-return /******/ (function(modules) { // webpackBootstrap
+var BlueProtocolSdk =
+/******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
 /******/
@@ -70,7 +61,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/ 	__webpack_require__.p = "/dist";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 38);
+/******/ 	return __webpack_require__(__webpack_require__.s = 40);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -86,9 +77,9 @@ if (typeof __g == 'number') __g = global; // eslint-disable-line no-undef
 /* 1 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var store = __webpack_require__(28)('wks');
+var store = __webpack_require__(29)('wks');
 
-var uid = __webpack_require__(29);
+var uid = __webpack_require__(30);
 
 var Symbol = __webpack_require__(0).Symbol;
 
@@ -113,7 +104,7 @@ if (typeof __e == 'number') __e = core; // eslint-disable-line no-undef
 /* 3 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var isObject = __webpack_require__(5);
+var isObject = __webpack_require__(8);
 
 module.exports = function (it) {
   if (!isObject(it)) throw TypeError(it + ' is not an object!');
@@ -124,11 +115,11 @@ module.exports = function (it) {
 /* 4 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var dP = __webpack_require__(11);
+var dP = __webpack_require__(7);
 
-var createDesc = __webpack_require__(26);
+var createDesc = __webpack_require__(27);
 
-module.exports = __webpack_require__(6) ? function (object, key, value) {
+module.exports = __webpack_require__(5) ? function (object, key, value) {
   return dP.f(object, key, createDesc(1, value));
 } : function (object, key, value) {
   object[key] = value;
@@ -137,18 +128,10 @@ module.exports = __webpack_require__(6) ? function (object, key, value) {
 
 /***/ }),
 /* 5 */
-/***/ (function(module, exports) {
-
-module.exports = function (it) {
-  return typeof it === 'object' ? it !== null : typeof it === 'function';
-};
-
-/***/ }),
-/* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // Thank's IE8 for his funny defineProperty
-module.exports = !__webpack_require__(25)(function () {
+module.exports = !__webpack_require__(26)(function () {
   return Object.defineProperty({}, 'a', {
     get: function () {
       return 7;
@@ -157,20 +140,14 @@ module.exports = !__webpack_require__(25)(function () {
 });
 
 /***/ }),
-/* 7 */
-/***/ (function(module, exports) {
-
-module.exports = {};
-
-/***/ }),
-/* 8 */
+/* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var global = __webpack_require__(0);
 
 var core = __webpack_require__(2);
 
-var ctx = __webpack_require__(9);
+var ctx = __webpack_require__(10);
 
 var hide = __webpack_require__(4);
 
@@ -252,11 +229,50 @@ $export.R = 128; // real proto method for `library`
 module.exports = $export;
 
 /***/ }),
+/* 7 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var anObject = __webpack_require__(3);
+
+var IE8_DOM_DEFINE = __webpack_require__(48);
+
+var toPrimitive = __webpack_require__(49);
+
+var dP = Object.defineProperty;
+exports.f = __webpack_require__(5) ? Object.defineProperty : function defineProperty(O, P, Attributes) {
+  anObject(O);
+  P = toPrimitive(P, true);
+  anObject(Attributes);
+  if (IE8_DOM_DEFINE) try {
+    return dP(O, P, Attributes);
+  } catch (e) {
+    /* empty */
+  }
+  if ('get' in Attributes || 'set' in Attributes) throw TypeError('Accessors not supported!');
+  if ('value' in Attributes) O[P] = Attributes.value;
+  return O;
+};
+
+/***/ }),
+/* 8 */
+/***/ (function(module, exports) {
+
+module.exports = function (it) {
+  return typeof it === 'object' ? it !== null : typeof it === 'function';
+};
+
+/***/ }),
 /* 9 */
+/***/ (function(module, exports) {
+
+module.exports = {};
+
+/***/ }),
+/* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // optional / simple context binding
-var aFunction = __webpack_require__(10);
+var aFunction = __webpack_require__(11);
 
 module.exports = function (fn, that, length) {
   aFunction(fn);
@@ -287,37 +303,12 @@ module.exports = function (fn, that, length) {
 };
 
 /***/ }),
-/* 10 */
+/* 11 */
 /***/ (function(module, exports) {
 
 module.exports = function (it) {
   if (typeof it != 'function') throw TypeError(it + ' is not a function!');
   return it;
-};
-
-/***/ }),
-/* 11 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var anObject = __webpack_require__(3);
-
-var IE8_DOM_DEFINE = __webpack_require__(44);
-
-var toPrimitive = __webpack_require__(45);
-
-var dP = Object.defineProperty;
-exports.f = __webpack_require__(6) ? Object.defineProperty : function defineProperty(O, P, Attributes) {
-  anObject(O);
-  P = toPrimitive(P, true);
-  anObject(Attributes);
-  if (IE8_DOM_DEFINE) try {
-    return dP(O, P, Attributes);
-  } catch (e) {
-    /* empty */
-  }
-  if ('get' in Attributes || 'set' in Attributes) throw TypeError('Accessors not supported!');
-  if ('value' in Attributes) O[P] = Attributes.value;
-  return O;
 };
 
 /***/ }),
@@ -372,7 +363,7 @@ module.exports = true;
 /* 17 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var isObject = __webpack_require__(5);
+var isObject = __webpack_require__(8);
 
 var document = __webpack_require__(0).document; // typeof document.createElement is 'object' in old IE
 
@@ -388,7 +379,7 @@ module.exports = function (it) {
 /***/ (function(module, exports, __webpack_require__) {
 
 // to indexed object, toObject with fallback for non-array-like ES3 strings
-var IObject = __webpack_require__(52);
+var IObject = __webpack_require__(56);
 
 var defined = __webpack_require__(15);
 
@@ -400,9 +391,9 @@ module.exports = function (it) {
 /* 19 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var shared = __webpack_require__(28)('keys');
+var shared = __webpack_require__(29)('keys');
 
-var uid = __webpack_require__(29);
+var uid = __webpack_require__(30);
 
 module.exports = function (key) {
   return shared[key] || (shared[key] = uid(key));
@@ -412,7 +403,7 @@ module.exports = function (key) {
 /* 20 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var def = __webpack_require__(11).f;
+var def = __webpack_require__(7).f;
 
 var has = __webpack_require__(12);
 
@@ -432,7 +423,7 @@ module.exports = function (it, tag, stat) {
 "use strict";
  // 25.4.1.5 NewPromiseCapability(C)
 
-var aFunction = __webpack_require__(10);
+var aFunction = __webpack_require__(11);
 
 function PromiseCapability(C) {
   var resolve, reject;
@@ -465,10 +456,54 @@ module.exports = _interopRequireDefault;
 /* 23 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(40);
+module.exports = __webpack_require__(41);
 
 /***/ }),
 /* 24 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var _Promise = __webpack_require__(43);
+
+function _asyncToGenerator(fn) {
+  return function () {
+    var self = this,
+        args = arguments;
+    return new _Promise(function (resolve, reject) {
+      var gen = fn.apply(self, args);
+
+      function step(key, arg) {
+        try {
+          var info = gen[key](arg);
+          var value = info.value;
+        } catch (error) {
+          reject(error);
+          return;
+        }
+
+        if (info.done) {
+          resolve(value);
+        } else {
+          _Promise.resolve(value).then(_next, _throw);
+        }
+      }
+
+      function _next(value) {
+        step("next", value);
+      }
+
+      function _throw(err) {
+        step("throw", err);
+      }
+
+      _next();
+    });
+  };
+}
+
+module.exports = _asyncToGenerator;
+
+/***/ }),
+/* 25 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -476,19 +511,19 @@ module.exports = __webpack_require__(40);
 
 var LIBRARY = __webpack_require__(16);
 
-var $export = __webpack_require__(8);
+var $export = __webpack_require__(6);
 
-var redefine = __webpack_require__(46);
+var redefine = __webpack_require__(50);
 
 var hide = __webpack_require__(4);
 
-var Iterators = __webpack_require__(7);
+var Iterators = __webpack_require__(9);
 
-var $iterCreate = __webpack_require__(47);
+var $iterCreate = __webpack_require__(51);
 
 var setToStringTag = __webpack_require__(20);
 
-var getPrototypeOf = __webpack_require__(55);
+var getPrototypeOf = __webpack_require__(59);
 
 var ITERATOR = __webpack_require__(1)('iterator');
 
@@ -579,7 +614,7 @@ module.exports = function (Base, NAME, Constructor, next, DEFAULT, IS_SET, FORCE
 };
 
 /***/ }),
-/* 25 */
+/* 26 */
 /***/ (function(module, exports) {
 
 module.exports = function (exec) {
@@ -591,7 +626,7 @@ module.exports = function (exec) {
 };
 
 /***/ }),
-/* 26 */
+/* 27 */
 /***/ (function(module, exports) {
 
 module.exports = function (bitmap, value) {
@@ -604,7 +639,7 @@ module.exports = function (bitmap, value) {
 };
 
 /***/ }),
-/* 27 */
+/* 28 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // 7.1.15 ToLength
@@ -617,7 +652,7 @@ module.exports = function (it) {
 };
 
 /***/ }),
-/* 28 */
+/* 29 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var core = __webpack_require__(2);
@@ -635,7 +670,7 @@ var store = global[SHARED] || (global[SHARED] = {});
 });
 
 /***/ }),
-/* 29 */
+/* 30 */
 /***/ (function(module, exports) {
 
 var id = 0;
@@ -646,14 +681,14 @@ module.exports = function (key) {
 };
 
 /***/ }),
-/* 30 */
+/* 31 */
 /***/ (function(module, exports) {
 
 // IE 8- don't enum bug keys
 module.exports = 'constructor,hasOwnProperty,isPrototypeOf,propertyIsEnumerable,toLocaleString,toString,valueOf'.split(',');
 
 /***/ }),
-/* 31 */
+/* 32 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var document = __webpack_require__(0).document;
@@ -661,7 +696,7 @@ var document = __webpack_require__(0).document;
 module.exports = document && document.documentElement;
 
 /***/ }),
-/* 32 */
+/* 33 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // getting tag from 19.1.3.6 Object.prototype.toString()
@@ -691,13 +726,13 @@ module.exports = function (it) {
 };
 
 /***/ }),
-/* 33 */
+/* 34 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // 7.3.20 SpeciesConstructor(O, defaultConstructor)
 var anObject = __webpack_require__(3);
 
-var aFunction = __webpack_require__(10);
+var aFunction = __webpack_require__(11);
 
 var SPECIES = __webpack_require__(1)('species');
 
@@ -708,14 +743,14 @@ module.exports = function (O, D) {
 };
 
 /***/ }),
-/* 34 */
+/* 35 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var ctx = __webpack_require__(9);
+var ctx = __webpack_require__(10);
 
-var invoke = __webpack_require__(67);
+var invoke = __webpack_require__(71);
 
-var html = __webpack_require__(31);
+var html = __webpack_require__(32);
 
 var cel = __webpack_require__(17);
 
@@ -810,7 +845,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 35 */
+/* 36 */
 /***/ (function(module, exports) {
 
 module.exports = function (exec) {
@@ -828,12 +863,12 @@ module.exports = function (exec) {
 };
 
 /***/ }),
-/* 36 */
+/* 37 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var anObject = __webpack_require__(3);
 
-var isObject = __webpack_require__(5);
+var isObject = __webpack_require__(8);
 
 var newPromiseCapability = __webpack_require__(21);
 
@@ -847,69 +882,44 @@ module.exports = function (C, x) {
 };
 
 /***/ }),
-/* 37 */
-/***/ (function(module, exports, __webpack_require__) {
+/* 38 */
+/***/ (function(module, exports) {
 
-var _Promise = __webpack_require__(23);
-
-function _asyncToGenerator(fn) {
-  return function () {
-    var self = this,
-        args = arguments;
-    return new _Promise(function (resolve, reject) {
-      var gen = fn.apply(self, args);
-
-      function step(key, arg) {
-        try {
-          var info = gen[key](arg);
-          var value = info.value;
-        } catch (error) {
-          reject(error);
-          return;
-        }
-
-        if (info.done) {
-          resolve(value);
-        } else {
-          _Promise.resolve(value).then(_next, _throw);
-        }
-      }
-
-      function _next(value) {
-        step("next", value);
-      }
-
-      function _throw(err) {
-        step("throw", err);
-      }
-
-      _next();
-    });
-  };
+function _classCallCheck(instance, Constructor) {
+  if (!(instance instanceof Constructor)) {
+    throw new TypeError("Cannot call a class as a function");
+  }
 }
 
-module.exports = _asyncToGenerator;
-
-/***/ }),
-/* 38 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-
-var _BlueProtocolSdk = __webpack_require__(39);
-
-console.log('hello2');
-var _default = _BlueProtocolSdk.BlueProtocolSdk;
-exports.default = _default;
+module.exports = _classCallCheck;
 
 /***/ }),
 /* 39 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var _Object$defineProperty = __webpack_require__(79);
+
+function _defineProperties(target, props) {
+  for (var i = 0; i < props.length; i++) {
+    var descriptor = props[i];
+    descriptor.enumerable = descriptor.enumerable || false;
+    descriptor.configurable = true;
+    if ("value" in descriptor) descriptor.writable = true;
+
+    _Object$defineProperty(target, descriptor.key, descriptor);
+  }
+}
+
+function _createClass(Constructor, protoProps, staticProps) {
+  if (protoProps) _defineProperties(Constructor.prototype, protoProps);
+  if (staticProps) _defineProperties(Constructor, staticProps);
+  return Constructor;
+}
+
+module.exports = _createClass;
+
+/***/ }),
+/* 40 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -917,22 +927,23 @@ exports.default = _default;
 
 var _interopRequireDefault = __webpack_require__(22);
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
+var _regenerator = _interopRequireDefault(__webpack_require__(23));
 
-var _promise = _interopRequireDefault(__webpack_require__(23));
+var _asyncToGenerator2 = _interopRequireDefault(__webpack_require__(24));
 
-var _asyncToGenerator2 = _interopRequireDefault(__webpack_require__(37));
+var _classCallCheck2 = _interopRequireDefault(__webpack_require__(38));
 
-var _ResourceManager = __webpack_require__(75);
+var _createClass2 = _interopRequireDefault(__webpack_require__(39));
+
+var _ResourceManager = __webpack_require__(82);
 
 /**
  * The BlueProtocolSdk class. Provides methods for interacting with the Blue
  * Protocol Sdk.
  */
-class BlueProtocolSdk {
+var BlueProtocolSdk =
+/*#__PURE__*/
+function () {
   /**
    * Constructor for the BlueProtocolSdk class.
    * @param {string} apiKey - Your BlueProtocol SDK api key
@@ -940,7 +951,9 @@ class BlueProtocolSdk {
    * @example
    * const blueSdk = new BlueProtocolSdk(YOUR_API_KEY);
    */
-  constructor(apiKey, network = 'mainnet') {
+  function BlueProtocolSdk(apiKey) {
+    var network = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'mainnet';
+    (0, _classCallCheck2.default)(this, BlueProtocolSdk);
     this.apiKey = apiKey;
     this.network = network;
   } // ------------------------------------------------------------------------>
@@ -984,91 +997,917 @@ class BlueProtocolSdk {
    */
 
 
-  scanLists(address) {
-    return (0, _asyncToGenerator2.default)(function* () {
-      const scanlistsUrl = _ResourceManager.ResourceManager.get('scanlists');
+  (0, _createClass2.default)(BlueProtocolSdk, [{
+    key: "scanLists",
+    value: function () {
+      var _scanLists = (0, _asyncToGenerator2.default)(
+      /*#__PURE__*/
+      _regenerator.default.mark(function _callee(address) {
+        var scanlistsUrl, response;
+        return _regenerator.default.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _context.next = 2;
+                return _ResourceManager.objResourceManager.getResource('scanlists');
 
-      return fetch(scanlistsUrl + address);
-    })();
-  } // ------------------------------------------------------------------------>
+              case 2:
+                scanlistsUrl = _context.sent;
+                _context.next = 5;
+                return fetch(scanlistsUrl + address);
 
-  /**
-   * The result of a call to the analyzeContract method.
-   * @typedef {Object} AnalysisResult
-   * @property {number} score - The weighted score
-   * @property {Array.<AnalysisResultEntry>} entries - The scan results
-   */
+              case 5:
+                response = _context.sent;
+                _context.next = 8;
+                return response.json();
 
-  /**
-   * An entry within the AnalysisResult entries property.
-   * @typedef {Object} AnalysisResultEntry
-   * @property {string} title
-   * @property {string} description
-   * @property {string} function - function hash
-   * @property {string} type - ['Informational', 'Warning']
-   * @property {string} debug - Additional information related to entry
-   */
+              case 8:
+                return _context.abrupt("return", _context.sent);
 
-  /**
-   * A number of analyzers are run against the given contract's
-   *
-   * @param {string} address - The address of the contract you wish to analyze
-   * @example
-   * blueSdk.analyzeContract('0x83D217450eB96F6247ff49d148409d4fEAf0405F')
-   * .then(result => {
-   *     console.log(result)
-   * })
-   * .catch(err => {
-   *     console.error(err)
-   * })
-   * @return {Promise.<AnalysisResult>}
-   */
+              case 9:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee, this);
+      }));
 
+      return function scanLists(_x) {
+        return _scanLists.apply(this, arguments);
+      };
+    }() // ------------------------------------------------------------------------>
 
-  analyzeContract(address) {
-    return new _promise.default();
-  }
+    /**
+     * The result of a call to the analyzeContract method.
+     * @typedef {Object} AnalysisResult
+     * @property {number} scan_status - [in_progress, complete]
+     * @property {Array.<AnalysisResultEntry>} entries - The scan results
+     */
 
-}
+    /**
+     * An entry within the AnalysisResult entries property.
+     * @typedef {Object} AnalysisResultEntry
+     * @property {string} title
+     * @property {string} description
+     * @property {string} function - function hash
+     * @property {string} type - ['Informational', 'Warning']
+     * @property {string} debug - Additional information related to entry
+     */
 
-var _default = BlueProtocolSdk;
-exports.default = _default;
+    /**
+     * A number of analyzers are run against the given contract
+     *
+     * @param {string} address - The address of the contract you wish to analyze
+     * @example
+     * blueSdk.analyzeContract('0x83D217450eB96F6247ff49d148409d4fEAf0405F')
+     * .then(result => {
+     *     console.log(result)
+     * })
+     * .catch(err => {
+     *     console.error(err)
+     * })
+     * @return {Promise.<AnalysisResult>}
+     */
+
+  }, {
+    key: "analyzeContract",
+    value: function () {
+      var _analyzeContract = (0, _asyncToGenerator2.default)(
+      /*#__PURE__*/
+      _regenerator.default.mark(function _callee2(address) {
+        var analyzecontractUrl, response;
+        return _regenerator.default.wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                _context2.next = 2;
+                return _ResourceManager.objResourceManager.getResource('analyzecontract');
+
+              case 2:
+                analyzecontractUrl = _context2.sent;
+                _context2.next = 5;
+                return fetch(analyzecontractUrl + address);
+
+              case 5:
+                response = _context2.sent;
+                _context2.next = 8;
+                return response.json();
+
+              case 8:
+                return _context2.abrupt("return", _context2.sent);
+
+              case 9:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2, this);
+      }));
+
+      return function analyzeContract(_x2) {
+        return _analyzeContract.apply(this, arguments);
+      };
+    }()
+  }]);
+  return BlueProtocolSdk;
+}();
+
+module.exports = BlueProtocolSdk;
 
 /***/ }),
-/* 40 */
+/* 41 */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(41);
+/**
+ * Copyright (c) 2014-present, Facebook, Inc.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+// This method of obtaining a reference to the global object needs to be
+// kept identical to the way it is obtained in runtime.js
+var g = function () {
+  return this;
+}() || Function("return this")(); // Use `getOwnPropertyNames` because not all browsers support calling
+// `hasOwnProperty` on the global `self` object in a worker. See #183.
 
-__webpack_require__(42);
 
-__webpack_require__(57);
+var hadRuntime = g.regeneratorRuntime && Object.getOwnPropertyNames(g).indexOf("regeneratorRuntime") >= 0; // Save the old regeneratorRuntime in case it needs to be restored later.
+
+var oldRuntime = hadRuntime && g.regeneratorRuntime; // Force reevalutation of runtime.js.
+
+g.regeneratorRuntime = undefined;
+module.exports = __webpack_require__(42);
+
+if (hadRuntime) {
+  // Restore the original runtime.
+  g.regeneratorRuntime = oldRuntime;
+} else {
+  // Remove the global property added by runtime.js.
+  try {
+    delete g.regeneratorRuntime;
+  } catch (e) {
+    g.regeneratorRuntime = undefined;
+  }
+}
+
+/***/ }),
+/* 42 */
+/***/ (function(module, exports) {
+
+/**
+ * Copyright (c) 2014-present, Facebook, Inc.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+!function (global) {
+  "use strict";
+
+  var Op = Object.prototype;
+  var hasOwn = Op.hasOwnProperty;
+  var undefined; // More compressible than void 0.
+
+  var $Symbol = typeof Symbol === "function" ? Symbol : {};
+  var iteratorSymbol = $Symbol.iterator || "@@iterator";
+  var asyncIteratorSymbol = $Symbol.asyncIterator || "@@asyncIterator";
+  var toStringTagSymbol = $Symbol.toStringTag || "@@toStringTag";
+  var inModule = typeof module === "object";
+  var runtime = global.regeneratorRuntime;
+
+  if (runtime) {
+    if (inModule) {
+      // If regeneratorRuntime is defined globally and we're in a module,
+      // make the exports object identical to regeneratorRuntime.
+      module.exports = runtime;
+    } // Don't bother evaluating the rest of this file if the runtime was
+    // already defined globally.
+
+
+    return;
+  } // Define the runtime globally (as expected by generated code) as either
+  // module.exports (if we're in a module) or a new, empty object.
+
+
+  runtime = global.regeneratorRuntime = inModule ? module.exports : {};
+
+  function wrap(innerFn, outerFn, self, tryLocsList) {
+    // If outerFn provided and outerFn.prototype is a Generator, then outerFn.prototype instanceof Generator.
+    var protoGenerator = outerFn && outerFn.prototype instanceof Generator ? outerFn : Generator;
+    var generator = Object.create(protoGenerator.prototype);
+    var context = new Context(tryLocsList || []); // The ._invoke method unifies the implementations of the .next,
+    // .throw, and .return methods.
+
+    generator._invoke = makeInvokeMethod(innerFn, self, context);
+    return generator;
+  }
+
+  runtime.wrap = wrap; // Try/catch helper to minimize deoptimizations. Returns a completion
+  // record like context.tryEntries[i].completion. This interface could
+  // have been (and was previously) designed to take a closure to be
+  // invoked without arguments, but in all the cases we care about we
+  // already have an existing method we want to call, so there's no need
+  // to create a new function object. We can even get away with assuming
+  // the method takes exactly one argument, since that happens to be true
+  // in every case, so we don't have to touch the arguments object. The
+  // only additional allocation required is the completion record, which
+  // has a stable shape and so hopefully should be cheap to allocate.
+
+  function tryCatch(fn, obj, arg) {
+    try {
+      return {
+        type: "normal",
+        arg: fn.call(obj, arg)
+      };
+    } catch (err) {
+      return {
+        type: "throw",
+        arg: err
+      };
+    }
+  }
+
+  var GenStateSuspendedStart = "suspendedStart";
+  var GenStateSuspendedYield = "suspendedYield";
+  var GenStateExecuting = "executing";
+  var GenStateCompleted = "completed"; // Returning this object from the innerFn has the same effect as
+  // breaking out of the dispatch switch statement.
+
+  var ContinueSentinel = {}; // Dummy constructor functions that we use as the .constructor and
+  // .constructor.prototype properties for functions that return Generator
+  // objects. For full spec compliance, you may wish to configure your
+  // minifier not to mangle the names of these two functions.
+
+  function Generator() {}
+
+  function GeneratorFunction() {}
+
+  function GeneratorFunctionPrototype() {} // This is a polyfill for %IteratorPrototype% for environments that
+  // don't natively support it.
+
+
+  var IteratorPrototype = {};
+
+  IteratorPrototype[iteratorSymbol] = function () {
+    return this;
+  };
+
+  var getProto = Object.getPrototypeOf;
+  var NativeIteratorPrototype = getProto && getProto(getProto(values([])));
+
+  if (NativeIteratorPrototype && NativeIteratorPrototype !== Op && hasOwn.call(NativeIteratorPrototype, iteratorSymbol)) {
+    // This environment has a native %IteratorPrototype%; use it instead
+    // of the polyfill.
+    IteratorPrototype = NativeIteratorPrototype;
+  }
+
+  var Gp = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(IteratorPrototype);
+  GeneratorFunction.prototype = Gp.constructor = GeneratorFunctionPrototype;
+  GeneratorFunctionPrototype.constructor = GeneratorFunction;
+  GeneratorFunctionPrototype[toStringTagSymbol] = GeneratorFunction.displayName = "GeneratorFunction"; // Helper for defining the .next, .throw, and .return methods of the
+  // Iterator interface in terms of a single ._invoke method.
+
+  function defineIteratorMethods(prototype) {
+    ["next", "throw", "return"].forEach(function (method) {
+      prototype[method] = function (arg) {
+        return this._invoke(method, arg);
+      };
+    });
+  }
+
+  runtime.isGeneratorFunction = function (genFun) {
+    var ctor = typeof genFun === "function" && genFun.constructor;
+    return ctor ? ctor === GeneratorFunction || // For the native GeneratorFunction constructor, the best we can
+    // do is to check its .name property.
+    (ctor.displayName || ctor.name) === "GeneratorFunction" : false;
+  };
+
+  runtime.mark = function (genFun) {
+    if (Object.setPrototypeOf) {
+      Object.setPrototypeOf(genFun, GeneratorFunctionPrototype);
+    } else {
+      genFun.__proto__ = GeneratorFunctionPrototype;
+
+      if (!(toStringTagSymbol in genFun)) {
+        genFun[toStringTagSymbol] = "GeneratorFunction";
+      }
+    }
+
+    genFun.prototype = Object.create(Gp);
+    return genFun;
+  }; // Within the body of any async function, `await x` is transformed to
+  // `yield regeneratorRuntime.awrap(x)`, so that the runtime can test
+  // `hasOwn.call(value, "__await")` to determine if the yielded value is
+  // meant to be awaited.
+
+
+  runtime.awrap = function (arg) {
+    return {
+      __await: arg
+    };
+  };
+
+  function AsyncIterator(generator) {
+    function invoke(method, arg, resolve, reject) {
+      var record = tryCatch(generator[method], generator, arg);
+
+      if (record.type === "throw") {
+        reject(record.arg);
+      } else {
+        var result = record.arg;
+        var value = result.value;
+
+        if (value && typeof value === "object" && hasOwn.call(value, "__await")) {
+          return Promise.resolve(value.__await).then(function (value) {
+            invoke("next", value, resolve, reject);
+          }, function (err) {
+            invoke("throw", err, resolve, reject);
+          });
+        }
+
+        return Promise.resolve(value).then(function (unwrapped) {
+          // When a yielded Promise is resolved, its final value becomes
+          // the .value of the Promise<{value,done}> result for the
+          // current iteration. If the Promise is rejected, however, the
+          // result for this iteration will be rejected with the same
+          // reason. Note that rejections of yielded Promises are not
+          // thrown back into the generator function, as is the case
+          // when an awaited Promise is rejected. This difference in
+          // behavior between yield and await is important, because it
+          // allows the consumer to decide what to do with the yielded
+          // rejection (swallow it and continue, manually .throw it back
+          // into the generator, abandon iteration, whatever). With
+          // await, by contrast, there is no opportunity to examine the
+          // rejection reason outside the generator function, so the
+          // only option is to throw it from the await expression, and
+          // let the generator function handle the exception.
+          result.value = unwrapped;
+          resolve(result);
+        }, reject);
+      }
+    }
+
+    var previousPromise;
+
+    function enqueue(method, arg) {
+      function callInvokeWithMethodAndArg() {
+        return new Promise(function (resolve, reject) {
+          invoke(method, arg, resolve, reject);
+        });
+      }
+
+      return previousPromise = // If enqueue has been called before, then we want to wait until
+      // all previous Promises have been resolved before calling invoke,
+      // so that results are always delivered in the correct order. If
+      // enqueue has not been called before, then it is important to
+      // call invoke immediately, without waiting on a callback to fire,
+      // so that the async generator function has the opportunity to do
+      // any necessary setup in a predictable way. This predictability
+      // is why the Promise constructor synchronously invokes its
+      // executor callback, and why async functions synchronously
+      // execute code before the first await. Since we implement simple
+      // async functions in terms of async generators, it is especially
+      // important to get this right, even though it requires care.
+      previousPromise ? previousPromise.then(callInvokeWithMethodAndArg, // Avoid propagating failures to Promises returned by later
+      // invocations of the iterator.
+      callInvokeWithMethodAndArg) : callInvokeWithMethodAndArg();
+    } // Define the unified helper method that is used to implement .next,
+    // .throw, and .return (see defineIteratorMethods).
+
+
+    this._invoke = enqueue;
+  }
+
+  defineIteratorMethods(AsyncIterator.prototype);
+
+  AsyncIterator.prototype[asyncIteratorSymbol] = function () {
+    return this;
+  };
+
+  runtime.AsyncIterator = AsyncIterator; // Note that simple async functions are implemented on top of
+  // AsyncIterator objects; they just return a Promise for the value of
+  // the final result produced by the iterator.
+
+  runtime.async = function (innerFn, outerFn, self, tryLocsList) {
+    var iter = new AsyncIterator(wrap(innerFn, outerFn, self, tryLocsList));
+    return runtime.isGeneratorFunction(outerFn) ? iter // If outerFn is a generator, return the full iterator.
+    : iter.next().then(function (result) {
+      return result.done ? result.value : iter.next();
+    });
+  };
+
+  function makeInvokeMethod(innerFn, self, context) {
+    var state = GenStateSuspendedStart;
+    return function invoke(method, arg) {
+      if (state === GenStateExecuting) {
+        throw new Error("Generator is already running");
+      }
+
+      if (state === GenStateCompleted) {
+        if (method === "throw") {
+          throw arg;
+        } // Be forgiving, per 25.3.3.3.3 of the spec:
+        // https://people.mozilla.org/~jorendorff/es6-draft.html#sec-generatorresume
+
+
+        return doneResult();
+      }
+
+      context.method = method;
+      context.arg = arg;
+
+      while (true) {
+        var delegate = context.delegate;
+
+        if (delegate) {
+          var delegateResult = maybeInvokeDelegate(delegate, context);
+
+          if (delegateResult) {
+            if (delegateResult === ContinueSentinel) continue;
+            return delegateResult;
+          }
+        }
+
+        if (context.method === "next") {
+          // Setting context._sent for legacy support of Babel's
+          // function.sent implementation.
+          context.sent = context._sent = context.arg;
+        } else if (context.method === "throw") {
+          if (state === GenStateSuspendedStart) {
+            state = GenStateCompleted;
+            throw context.arg;
+          }
+
+          context.dispatchException(context.arg);
+        } else if (context.method === "return") {
+          context.abrupt("return", context.arg);
+        }
+
+        state = GenStateExecuting;
+        var record = tryCatch(innerFn, self, context);
+
+        if (record.type === "normal") {
+          // If an exception is thrown from innerFn, we leave state ===
+          // GenStateExecuting and loop back for another invocation.
+          state = context.done ? GenStateCompleted : GenStateSuspendedYield;
+
+          if (record.arg === ContinueSentinel) {
+            continue;
+          }
+
+          return {
+            value: record.arg,
+            done: context.done
+          };
+        } else if (record.type === "throw") {
+          state = GenStateCompleted; // Dispatch the exception by looping back around to the
+          // context.dispatchException(context.arg) call above.
+
+          context.method = "throw";
+          context.arg = record.arg;
+        }
+      }
+    };
+  } // Call delegate.iterator[context.method](context.arg) and handle the
+  // result, either by returning a { value, done } result from the
+  // delegate iterator, or by modifying context.method and context.arg,
+  // setting context.delegate to null, and returning the ContinueSentinel.
+
+
+  function maybeInvokeDelegate(delegate, context) {
+    var method = delegate.iterator[context.method];
+
+    if (method === undefined) {
+      // A .throw or .return when the delegate iterator has no .throw
+      // method always terminates the yield* loop.
+      context.delegate = null;
+
+      if (context.method === "throw") {
+        if (delegate.iterator.return) {
+          // If the delegate iterator has a return method, give it a
+          // chance to clean up.
+          context.method = "return";
+          context.arg = undefined;
+          maybeInvokeDelegate(delegate, context);
+
+          if (context.method === "throw") {
+            // If maybeInvokeDelegate(context) changed context.method from
+            // "return" to "throw", let that override the TypeError below.
+            return ContinueSentinel;
+          }
+        }
+
+        context.method = "throw";
+        context.arg = new TypeError("The iterator does not provide a 'throw' method");
+      }
+
+      return ContinueSentinel;
+    }
+
+    var record = tryCatch(method, delegate.iterator, context.arg);
+
+    if (record.type === "throw") {
+      context.method = "throw";
+      context.arg = record.arg;
+      context.delegate = null;
+      return ContinueSentinel;
+    }
+
+    var info = record.arg;
+
+    if (!info) {
+      context.method = "throw";
+      context.arg = new TypeError("iterator result is not an object");
+      context.delegate = null;
+      return ContinueSentinel;
+    }
+
+    if (info.done) {
+      // Assign the result of the finished delegate to the temporary
+      // variable specified by delegate.resultName (see delegateYield).
+      context[delegate.resultName] = info.value; // Resume execution at the desired location (see delegateYield).
+
+      context.next = delegate.nextLoc; // If context.method was "throw" but the delegate handled the
+      // exception, let the outer generator proceed normally. If
+      // context.method was "next", forget context.arg since it has been
+      // "consumed" by the delegate iterator. If context.method was
+      // "return", allow the original .return call to continue in the
+      // outer generator.
+
+      if (context.method !== "return") {
+        context.method = "next";
+        context.arg = undefined;
+      }
+    } else {
+      // Re-yield the result returned by the delegate method.
+      return info;
+    } // The delegate iterator is finished, so forget it and continue with
+    // the outer generator.
+
+
+    context.delegate = null;
+    return ContinueSentinel;
+  } // Define Generator.prototype.{next,throw,return} in terms of the
+  // unified ._invoke helper method.
+
+
+  defineIteratorMethods(Gp);
+  Gp[toStringTagSymbol] = "Generator"; // A Generator should always return itself as the iterator object when the
+  // @@iterator function is called on it. Some browsers' implementations of the
+  // iterator prototype chain incorrectly implement this, causing the Generator
+  // object to not be returned from this call. This ensures that doesn't happen.
+  // See https://github.com/facebook/regenerator/issues/274 for more details.
+
+  Gp[iteratorSymbol] = function () {
+    return this;
+  };
+
+  Gp.toString = function () {
+    return "[object Generator]";
+  };
+
+  function pushTryEntry(locs) {
+    var entry = {
+      tryLoc: locs[0]
+    };
+
+    if (1 in locs) {
+      entry.catchLoc = locs[1];
+    }
+
+    if (2 in locs) {
+      entry.finallyLoc = locs[2];
+      entry.afterLoc = locs[3];
+    }
+
+    this.tryEntries.push(entry);
+  }
+
+  function resetTryEntry(entry) {
+    var record = entry.completion || {};
+    record.type = "normal";
+    delete record.arg;
+    entry.completion = record;
+  }
+
+  function Context(tryLocsList) {
+    // The root entry object (effectively a try statement without a catch
+    // or a finally block) gives us a place to store values thrown from
+    // locations where there is no enclosing try statement.
+    this.tryEntries = [{
+      tryLoc: "root"
+    }];
+    tryLocsList.forEach(pushTryEntry, this);
+    this.reset(true);
+  }
+
+  runtime.keys = function (object) {
+    var keys = [];
+
+    for (var key in object) {
+      keys.push(key);
+    }
+
+    keys.reverse(); // Rather than returning an object with a next method, we keep
+    // things simple and return the next function itself.
+
+    return function next() {
+      while (keys.length) {
+        var key = keys.pop();
+
+        if (key in object) {
+          next.value = key;
+          next.done = false;
+          return next;
+        }
+      } // To avoid creating an additional object, we just hang the .value
+      // and .done properties off the next function object itself. This
+      // also ensures that the minifier will not anonymize the function.
+
+
+      next.done = true;
+      return next;
+    };
+  };
+
+  function values(iterable) {
+    if (iterable) {
+      var iteratorMethod = iterable[iteratorSymbol];
+
+      if (iteratorMethod) {
+        return iteratorMethod.call(iterable);
+      }
+
+      if (typeof iterable.next === "function") {
+        return iterable;
+      }
+
+      if (!isNaN(iterable.length)) {
+        var i = -1,
+            next = function next() {
+          while (++i < iterable.length) {
+            if (hasOwn.call(iterable, i)) {
+              next.value = iterable[i];
+              next.done = false;
+              return next;
+            }
+          }
+
+          next.value = undefined;
+          next.done = true;
+          return next;
+        };
+
+        return next.next = next;
+      }
+    } // Return an iterator with no values.
+
+
+    return {
+      next: doneResult
+    };
+  }
+
+  runtime.values = values;
+
+  function doneResult() {
+    return {
+      value: undefined,
+      done: true
+    };
+  }
+
+  Context.prototype = {
+    constructor: Context,
+    reset: function (skipTempReset) {
+      this.prev = 0;
+      this.next = 0; // Resetting context._sent for legacy support of Babel's
+      // function.sent implementation.
+
+      this.sent = this._sent = undefined;
+      this.done = false;
+      this.delegate = null;
+      this.method = "next";
+      this.arg = undefined;
+      this.tryEntries.forEach(resetTryEntry);
+
+      if (!skipTempReset) {
+        for (var name in this) {
+          // Not sure about the optimal order of these conditions:
+          if (name.charAt(0) === "t" && hasOwn.call(this, name) && !isNaN(+name.slice(1))) {
+            this[name] = undefined;
+          }
+        }
+      }
+    },
+    stop: function () {
+      this.done = true;
+      var rootEntry = this.tryEntries[0];
+      var rootRecord = rootEntry.completion;
+
+      if (rootRecord.type === "throw") {
+        throw rootRecord.arg;
+      }
+
+      return this.rval;
+    },
+    dispatchException: function (exception) {
+      if (this.done) {
+        throw exception;
+      }
+
+      var context = this;
+
+      function handle(loc, caught) {
+        record.type = "throw";
+        record.arg = exception;
+        context.next = loc;
+
+        if (caught) {
+          // If the dispatched exception was caught by a catch block,
+          // then let that catch block handle the exception normally.
+          context.method = "next";
+          context.arg = undefined;
+        }
+
+        return !!caught;
+      }
+
+      for (var i = this.tryEntries.length - 1; i >= 0; --i) {
+        var entry = this.tryEntries[i];
+        var record = entry.completion;
+
+        if (entry.tryLoc === "root") {
+          // Exception thrown outside of any try block that could handle
+          // it, so set the completion value of the entire function to
+          // throw the exception.
+          return handle("end");
+        }
+
+        if (entry.tryLoc <= this.prev) {
+          var hasCatch = hasOwn.call(entry, "catchLoc");
+          var hasFinally = hasOwn.call(entry, "finallyLoc");
+
+          if (hasCatch && hasFinally) {
+            if (this.prev < entry.catchLoc) {
+              return handle(entry.catchLoc, true);
+            } else if (this.prev < entry.finallyLoc) {
+              return handle(entry.finallyLoc);
+            }
+          } else if (hasCatch) {
+            if (this.prev < entry.catchLoc) {
+              return handle(entry.catchLoc, true);
+            }
+          } else if (hasFinally) {
+            if (this.prev < entry.finallyLoc) {
+              return handle(entry.finallyLoc);
+            }
+          } else {
+            throw new Error("try statement without catch or finally");
+          }
+        }
+      }
+    },
+    abrupt: function (type, arg) {
+      for (var i = this.tryEntries.length - 1; i >= 0; --i) {
+        var entry = this.tryEntries[i];
+
+        if (entry.tryLoc <= this.prev && hasOwn.call(entry, "finallyLoc") && this.prev < entry.finallyLoc) {
+          var finallyEntry = entry;
+          break;
+        }
+      }
+
+      if (finallyEntry && (type === "break" || type === "continue") && finallyEntry.tryLoc <= arg && arg <= finallyEntry.finallyLoc) {
+        // Ignore the finally entry if control is not jumping to a
+        // location outside the try/catch block.
+        finallyEntry = null;
+      }
+
+      var record = finallyEntry ? finallyEntry.completion : {};
+      record.type = type;
+      record.arg = arg;
+
+      if (finallyEntry) {
+        this.method = "next";
+        this.next = finallyEntry.finallyLoc;
+        return ContinueSentinel;
+      }
+
+      return this.complete(record);
+    },
+    complete: function (record, afterLoc) {
+      if (record.type === "throw") {
+        throw record.arg;
+      }
+
+      if (record.type === "break" || record.type === "continue") {
+        this.next = record.arg;
+      } else if (record.type === "return") {
+        this.rval = this.arg = record.arg;
+        this.method = "return";
+        this.next = "end";
+      } else if (record.type === "normal" && afterLoc) {
+        this.next = afterLoc;
+      }
+
+      return ContinueSentinel;
+    },
+    finish: function (finallyLoc) {
+      for (var i = this.tryEntries.length - 1; i >= 0; --i) {
+        var entry = this.tryEntries[i];
+
+        if (entry.finallyLoc === finallyLoc) {
+          this.complete(entry.completion, entry.afterLoc);
+          resetTryEntry(entry);
+          return ContinueSentinel;
+        }
+      }
+    },
+    "catch": function (tryLoc) {
+      for (var i = this.tryEntries.length - 1; i >= 0; --i) {
+        var entry = this.tryEntries[i];
+
+        if (entry.tryLoc === tryLoc) {
+          var record = entry.completion;
+
+          if (record.type === "throw") {
+            var thrown = record.arg;
+            resetTryEntry(entry);
+          }
+
+          return thrown;
+        }
+      } // The context.catch method must only be called with a location
+      // argument that corresponds to a known catch block.
+
+
+      throw new Error("illegal catch attempt");
+    },
+    delegateYield: function (iterable, resultName, nextLoc) {
+      this.delegate = {
+        iterator: values(iterable),
+        resultName: resultName,
+        nextLoc: nextLoc
+      };
+
+      if (this.method === "next") {
+        // Deliberately forget the last sent value so that we don't
+        // accidentally pass it on to the delegate.
+        this.arg = undefined;
+      }
+
+      return ContinueSentinel;
+    }
+  };
+}( // In sloppy mode, unbound `this` refers to the global object, fallback to
+// Function constructor if we're in global strict mode. That is sadly a form
+// of indirect eval which violates Content Security Policy.
+function () {
+  return this;
+}() || Function("return this")());
+
+/***/ }),
+/* 43 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(44);
+
+/***/ }),
+/* 44 */
+/***/ (function(module, exports, __webpack_require__) {
+
+__webpack_require__(45);
+
+__webpack_require__(46);
 
 __webpack_require__(61);
 
-__webpack_require__(73);
+__webpack_require__(65);
 
-__webpack_require__(74);
+__webpack_require__(77);
+
+__webpack_require__(78);
 
 module.exports = __webpack_require__(2).Promise;
 
 /***/ }),
-/* 41 */
+/* 45 */
 /***/ (function(module, exports) {
 
 
 
 /***/ }),
-/* 42 */
+/* 46 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var $at = __webpack_require__(43)(true); // 21.1.3.27 String.prototype[@@iterator]()
+var $at = __webpack_require__(47)(true); // 21.1.3.27 String.prototype[@@iterator]()
 
 
-__webpack_require__(24)(String, 'String', function (iterated) {
+__webpack_require__(25)(String, 'String', function (iterated) {
   this._t = String(iterated); // target
 
   this._i = 0; // next index
@@ -1090,7 +1929,7 @@ __webpack_require__(24)(String, 'String', function (iterated) {
 });
 
 /***/ }),
-/* 43 */
+/* 47 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var toInteger = __webpack_require__(14);
@@ -1112,10 +1951,10 @@ module.exports = function (TO_STRING) {
 };
 
 /***/ }),
-/* 44 */
+/* 48 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = !__webpack_require__(6) && !__webpack_require__(25)(function () {
+module.exports = !__webpack_require__(5) && !__webpack_require__(26)(function () {
   return Object.defineProperty(__webpack_require__(17)('div'), 'a', {
     get: function () {
       return 7;
@@ -1124,11 +1963,11 @@ module.exports = !__webpack_require__(6) && !__webpack_require__(25)(function ()
 });
 
 /***/ }),
-/* 45 */
+/* 49 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // 7.1.1 ToPrimitive(input [, PreferredType])
-var isObject = __webpack_require__(5); // instead of the ES6 spec version, we didn't implement @@toPrimitive case
+var isObject = __webpack_require__(8); // instead of the ES6 spec version, we didn't implement @@toPrimitive case
 // and the second argument - flag - preferred type is a string
 
 
@@ -1142,21 +1981,21 @@ module.exports = function (it, S) {
 };
 
 /***/ }),
-/* 46 */
+/* 50 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__(4);
 
 /***/ }),
-/* 47 */
+/* 51 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var create = __webpack_require__(48);
+var create = __webpack_require__(52);
 
-var descriptor = __webpack_require__(26);
+var descriptor = __webpack_require__(27);
 
 var setToStringTag = __webpack_require__(20);
 
@@ -1174,15 +2013,15 @@ module.exports = function (Constructor, NAME, next) {
 };
 
 /***/ }),
-/* 48 */
+/* 52 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // 19.1.2.2 / 15.2.3.5 Object.create(O [, Properties])
 var anObject = __webpack_require__(3);
 
-var dPs = __webpack_require__(49);
+var dPs = __webpack_require__(53);
 
-var enumBugKeys = __webpack_require__(30);
+var enumBugKeys = __webpack_require__(31);
 
 var IE_PROTO = __webpack_require__(19)('IE_PROTO');
 
@@ -1202,7 +2041,7 @@ var createDict = function () {
   var iframeDocument;
   iframe.style.display = 'none';
 
-  __webpack_require__(31).appendChild(iframe);
+  __webpack_require__(32).appendChild(iframe);
 
   iframe.src = 'javascript:'; // eslint-disable-line no-script-url
   // createDict = iframe.contentWindow.Object;
@@ -1234,16 +2073,16 @@ module.exports = Object.create || function create(O, Properties) {
 };
 
 /***/ }),
-/* 49 */
+/* 53 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var dP = __webpack_require__(11);
+var dP = __webpack_require__(7);
 
 var anObject = __webpack_require__(3);
 
-var getKeys = __webpack_require__(50);
+var getKeys = __webpack_require__(54);
 
-module.exports = __webpack_require__(6) ? Object.defineProperties : function defineProperties(O, Properties) {
+module.exports = __webpack_require__(5) ? Object.defineProperties : function defineProperties(O, Properties) {
   anObject(O);
   var keys = getKeys(Properties);
   var length = keys.length;
@@ -1256,27 +2095,27 @@ module.exports = __webpack_require__(6) ? Object.defineProperties : function def
 };
 
 /***/ }),
-/* 50 */
+/* 54 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // 19.1.2.14 / 15.2.3.14 Object.keys(O)
-var $keys = __webpack_require__(51);
+var $keys = __webpack_require__(55);
 
-var enumBugKeys = __webpack_require__(30);
+var enumBugKeys = __webpack_require__(31);
 
 module.exports = Object.keys || function keys(O) {
   return $keys(O, enumBugKeys);
 };
 
 /***/ }),
-/* 51 */
+/* 55 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var has = __webpack_require__(12);
 
 var toIObject = __webpack_require__(18);
 
-var arrayIndexOf = __webpack_require__(53)(false);
+var arrayIndexOf = __webpack_require__(57)(false);
 
 var IE_PROTO = __webpack_require__(19)('IE_PROTO');
 
@@ -1297,7 +2136,7 @@ module.exports = function (object, names) {
 };
 
 /***/ }),
-/* 52 */
+/* 56 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // fallback for non-array-like ES3 and non-enumerable old V8 strings
@@ -1309,16 +2148,16 @@ module.exports = Object('z').propertyIsEnumerable(0) ? Object : function (it) {
 };
 
 /***/ }),
-/* 53 */
+/* 57 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // false -> Array#indexOf
 // true  -> Array#includes
 var toIObject = __webpack_require__(18);
 
-var toLength = __webpack_require__(27);
+var toLength = __webpack_require__(28);
 
-var toAbsoluteIndex = __webpack_require__(54);
+var toAbsoluteIndex = __webpack_require__(58);
 
 module.exports = function (IS_INCLUDES) {
   return function ($this, el, fromIndex) {
@@ -1340,7 +2179,7 @@ module.exports = function (IS_INCLUDES) {
 };
 
 /***/ }),
-/* 54 */
+/* 58 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var toInteger = __webpack_require__(14);
@@ -1354,13 +2193,13 @@ module.exports = function (index, length) {
 };
 
 /***/ }),
-/* 55 */
+/* 59 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // 19.1.2.9 / 15.2.3.2 Object.getPrototypeOf(O)
 var has = __webpack_require__(12);
 
-var toObject = __webpack_require__(56);
+var toObject = __webpack_require__(60);
 
 var IE_PROTO = __webpack_require__(19)('IE_PROTO');
 
@@ -1378,7 +2217,7 @@ module.exports = Object.getPrototypeOf || function (O) {
 };
 
 /***/ }),
-/* 56 */
+/* 60 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // 7.1.13 ToObject(argument)
@@ -1389,16 +2228,16 @@ module.exports = function (it) {
 };
 
 /***/ }),
-/* 57 */
+/* 61 */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(58);
+__webpack_require__(62);
 
 var global = __webpack_require__(0);
 
 var hide = __webpack_require__(4);
 
-var Iterators = __webpack_require__(7);
+var Iterators = __webpack_require__(9);
 
 var TO_STRING_TAG = __webpack_require__(1)('toStringTag');
 
@@ -1413,17 +2252,17 @@ for (var i = 0; i < DOMIterables.length; i++) {
 }
 
 /***/ }),
-/* 58 */
+/* 62 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var addToUnscopables = __webpack_require__(59);
+var addToUnscopables = __webpack_require__(63);
 
-var step = __webpack_require__(60);
+var step = __webpack_require__(64);
 
-var Iterators = __webpack_require__(7);
+var Iterators = __webpack_require__(9);
 
 var toIObject = __webpack_require__(18); // 22.1.3.4 Array.prototype.entries()
 // 22.1.3.13 Array.prototype.keys()
@@ -1431,7 +2270,7 @@ var toIObject = __webpack_require__(18); // 22.1.3.4 Array.prototype.entries()
 // 22.1.3.30 Array.prototype[@@iterator]()
 
 
-module.exports = __webpack_require__(24)(Array, 'Array', function (iterated, kind) {
+module.exports = __webpack_require__(25)(Array, 'Array', function (iterated, kind) {
   this._t = toIObject(iterated); // target
 
   this._i = 0; // next index
@@ -1459,7 +2298,7 @@ addToUnscopables('values');
 addToUnscopables('entries');
 
 /***/ }),
-/* 59 */
+/* 63 */
 /***/ (function(module, exports) {
 
 module.exports = function () {
@@ -1467,7 +2306,7 @@ module.exports = function () {
 };
 
 /***/ }),
-/* 60 */
+/* 64 */
 /***/ (function(module, exports) {
 
 module.exports = function (done, value) {
@@ -1478,7 +2317,7 @@ module.exports = function (done, value) {
 };
 
 /***/ }),
-/* 61 */
+/* 65 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1488,33 +2327,33 @@ var LIBRARY = __webpack_require__(16);
 
 var global = __webpack_require__(0);
 
-var ctx = __webpack_require__(9);
+var ctx = __webpack_require__(10);
 
-var classof = __webpack_require__(32);
+var classof = __webpack_require__(33);
 
-var $export = __webpack_require__(8);
+var $export = __webpack_require__(6);
 
-var isObject = __webpack_require__(5);
+var isObject = __webpack_require__(8);
 
-var aFunction = __webpack_require__(10);
+var aFunction = __webpack_require__(11);
 
-var anInstance = __webpack_require__(62);
+var anInstance = __webpack_require__(66);
 
-var forOf = __webpack_require__(63);
+var forOf = __webpack_require__(67);
 
-var speciesConstructor = __webpack_require__(33);
+var speciesConstructor = __webpack_require__(34);
 
-var task = __webpack_require__(34).set;
+var task = __webpack_require__(35).set;
 
-var microtask = __webpack_require__(68)();
+var microtask = __webpack_require__(72)();
 
 var newPromiseCapabilityModule = __webpack_require__(21);
 
-var perform = __webpack_require__(35);
+var perform = __webpack_require__(36);
 
-var userAgent = __webpack_require__(69);
+var userAgent = __webpack_require__(73);
 
-var promiseResolve = __webpack_require__(36);
+var promiseResolve = __webpack_require__(37);
 
 var PROMISE = 'Promise';
 var TypeError = global.TypeError;
@@ -1735,7 +2574,7 @@ if (!USE_NATIVE) {
     this._n = false; // <- notify
   };
 
-  Internal.prototype = __webpack_require__(70)($Promise.prototype, {
+  Internal.prototype = __webpack_require__(74)($Promise.prototype, {
     // 25.4.5.3 Promise.prototype.then(onFulfilled, onRejected)
     then: function then(onFulfilled, onRejected) {
       var reaction = newPromiseCapability(speciesConstructor(this, $Promise));
@@ -1773,7 +2612,7 @@ $export($export.G + $export.W + $export.F * !USE_NATIVE, {
 
 __webpack_require__(20)($Promise, PROMISE);
 
-__webpack_require__(71)(PROMISE);
+__webpack_require__(75)(PROMISE);
 
 Wrapper = __webpack_require__(2)[PROMISE]; // statics
 
@@ -1792,7 +2631,7 @@ $export($export.S + $export.F * (LIBRARY || !USE_NATIVE), PROMISE, {
     return promiseResolve(LIBRARY && this === Wrapper ? $Promise : this, x);
   }
 });
-$export($export.S + $export.F * !(USE_NATIVE && __webpack_require__(72)(function (iter) {
+$export($export.S + $export.F * !(USE_NATIVE && __webpack_require__(76)(function (iter) {
   $Promise.all(iter)['catch'](empty);
 })), PROMISE, {
   // 25.4.4.1 Promise.all(iterable)
@@ -1838,7 +2677,7 @@ $export($export.S + $export.F * !(USE_NATIVE && __webpack_require__(72)(function
 });
 
 /***/ }),
-/* 62 */
+/* 66 */
 /***/ (function(module, exports) {
 
 module.exports = function (it, Constructor, name, forbiddenField) {
@@ -1850,20 +2689,20 @@ module.exports = function (it, Constructor, name, forbiddenField) {
 };
 
 /***/ }),
-/* 63 */
+/* 67 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var ctx = __webpack_require__(9);
+var ctx = __webpack_require__(10);
 
-var call = __webpack_require__(64);
+var call = __webpack_require__(68);
 
-var isArrayIter = __webpack_require__(65);
+var isArrayIter = __webpack_require__(69);
 
 var anObject = __webpack_require__(3);
 
-var toLength = __webpack_require__(27);
+var toLength = __webpack_require__(28);
 
-var getIterFn = __webpack_require__(66);
+var getIterFn = __webpack_require__(70);
 
 var BREAK = {};
 var RETURN = {};
@@ -1890,7 +2729,7 @@ exports.BREAK = BREAK;
 exports.RETURN = RETURN;
 
 /***/ }),
-/* 64 */
+/* 68 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // call something on iterator step with safe closing on error
@@ -1907,11 +2746,11 @@ module.exports = function (iterator, fn, value, entries) {
 };
 
 /***/ }),
-/* 65 */
+/* 69 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // check on default Array iterator
-var Iterators = __webpack_require__(7);
+var Iterators = __webpack_require__(9);
 
 var ITERATOR = __webpack_require__(1)('iterator');
 
@@ -1922,21 +2761,21 @@ module.exports = function (it) {
 };
 
 /***/ }),
-/* 66 */
+/* 70 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var classof = __webpack_require__(32);
+var classof = __webpack_require__(33);
 
 var ITERATOR = __webpack_require__(1)('iterator');
 
-var Iterators = __webpack_require__(7);
+var Iterators = __webpack_require__(9);
 
 module.exports = __webpack_require__(2).getIteratorMethod = function (it) {
   if (it != undefined) return it[ITERATOR] || it['@@iterator'] || Iterators[classof(it)];
 };
 
 /***/ }),
-/* 67 */
+/* 71 */
 /***/ (function(module, exports) {
 
 // fast apply, http://jsperf.lnkit.com/fast-apply/5
@@ -1964,12 +2803,12 @@ module.exports = function (fn, args, that) {
 };
 
 /***/ }),
-/* 68 */
+/* 72 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var global = __webpack_require__(0);
 
-var macrotask = __webpack_require__(34).set;
+var macrotask = __webpack_require__(35).set;
 
 var Observer = global.MutationObserver || global.WebKitMutationObserver;
 var process = global.process;
@@ -2053,7 +2892,7 @@ module.exports = function () {
 };
 
 /***/ }),
-/* 69 */
+/* 73 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var global = __webpack_require__(0);
@@ -2062,7 +2901,7 @@ var navigator = global.navigator;
 module.exports = navigator && navigator.userAgent || '';
 
 /***/ }),
-/* 70 */
+/* 74 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var hide = __webpack_require__(4);
@@ -2076,7 +2915,7 @@ module.exports = function (target, src, safe) {
 };
 
 /***/ }),
-/* 71 */
+/* 75 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2086,9 +2925,9 @@ var global = __webpack_require__(0);
 
 var core = __webpack_require__(2);
 
-var dP = __webpack_require__(11);
+var dP = __webpack_require__(7);
 
-var DESCRIPTORS = __webpack_require__(6);
+var DESCRIPTORS = __webpack_require__(5);
 
 var SPECIES = __webpack_require__(1)('species');
 
@@ -2103,7 +2942,7 @@ module.exports = function (KEY) {
 };
 
 /***/ }),
-/* 72 */
+/* 76 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var ITERATOR = __webpack_require__(1)('iterator');
@@ -2152,22 +2991,22 @@ module.exports = function (exec, skipClosing) {
 };
 
 /***/ }),
-/* 73 */
+/* 77 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 // https://github.com/tc39/proposal-promise-finally
 
 
-var $export = __webpack_require__(8);
+var $export = __webpack_require__(6);
 
 var core = __webpack_require__(2);
 
 var global = __webpack_require__(0);
 
-var speciesConstructor = __webpack_require__(33);
+var speciesConstructor = __webpack_require__(34);
 
-var promiseResolve = __webpack_require__(36);
+var promiseResolve = __webpack_require__(37);
 
 $export($export.P + $export.R, 'Promise', {
   'finally': function (onFinally) {
@@ -2186,17 +3025,17 @@ $export($export.P + $export.R, 'Promise', {
 });
 
 /***/ }),
-/* 74 */
+/* 78 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
  // https://github.com/tc39/proposal-promise-try
 
-var $export = __webpack_require__(8);
+var $export = __webpack_require__(6);
 
 var newPromiseCapability = __webpack_require__(21);
 
-var perform = __webpack_require__(35);
+var perform = __webpack_require__(36);
 
 $export($export.S, 'Promise', {
   'try': function (callbackfn) {
@@ -2208,7 +3047,36 @@ $export($export.S, 'Promise', {
 });
 
 /***/ }),
-/* 75 */
+/* 79 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(80);
+
+/***/ }),
+/* 80 */
+/***/ (function(module, exports, __webpack_require__) {
+
+__webpack_require__(81);
+
+var $Object = __webpack_require__(2).Object;
+
+module.exports = function defineProperty(it, key, desc) {
+  return $Object.defineProperty(it, key, desc);
+};
+
+/***/ }),
+/* 81 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var $export = __webpack_require__(6); // 19.1.2.4 / 15.2.3.6 Object.defineProperty(O, P, Attributes)
+
+
+$export($export.S + $export.F * !__webpack_require__(5), 'Object', {
+  defineProperty: __webpack_require__(7).f
+});
+
+/***/ }),
+/* 82 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2219,21 +3087,32 @@ var _interopRequireDefault = __webpack_require__(22);
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = void 0;
+exports.objResourceManager = void 0;
 
-var _asyncToGenerator2 = _interopRequireDefault(__webpack_require__(37));
+var _regenerator = _interopRequireDefault(__webpack_require__(23));
 
-const RESOURCES_URL = 'https://s3-us-west-2.amazonaws.com/blue-protocol-sdk/config/resources.json';
-const SESSION_STORAGE_KEY = 'blue-sdk-resources';
+var _stringify = _interopRequireDefault(__webpack_require__(83));
+
+var _asyncToGenerator2 = _interopRequireDefault(__webpack_require__(24));
+
+var _classCallCheck2 = _interopRequireDefault(__webpack_require__(38));
+
+var _createClass2 = _interopRequireDefault(__webpack_require__(39));
+
+var RESOURCES_URL = 'https://s3-us-west-2.amazonaws.com/blue-protocol-sdk/resources.json';
+var SESSION_STORAGE_KEY = 'blue-sdk-resources';
 /**
  * The ResourceManager class, provides methods for retrieving remote resources.
  */
 
-class ResourceManager {
+var ResourceManager =
+/*#__PURE__*/
+function () {
   /**
    * Constructor.
    */
-  constructor() {
+  function ResourceManager() {
+    (0, _classCallCheck2.default)(this, ResourceManager);
     this.resources = null;
     this.fetchedResources = false;
   }
@@ -2242,52 +3121,139 @@ class ResourceManager {
    */
 
 
-  _setResources() {
-    var _this = this;
+  (0, _createClass2.default)(ResourceManager, [{
+    key: "_setResources",
+    value: function () {
+      var _setResources2 = (0, _asyncToGenerator2.default)(
+      /*#__PURE__*/
+      _regenerator.default.mark(function _callee() {
+        var resources, resourceResponse;
+        return _regenerator.default.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                resources = sessionStorage.getItem(SESSION_STORAGE_KEY);
 
-    return (0, _asyncToGenerator2.default)(function* () {
-      let resourcesJson = sessionStorage.getItem(SESSION_STORAGE_KEY);
+                if (!(resources === null && this.fetchedResources === false)) {
+                  _context.next = 12;
+                  break;
+                }
 
-      if (resourcesJson === null && _this.fetchedResources === false) {
-        resourcesJson = yield fetch(RESOURCES_URL);
-        sessionStorage.setItem(resourcesJson);
-        _this.fetchedResources = true;
-      } else if (resourcesJson === null && _this.fetchedResources !== false) {
-        throw new Error('Unable to fetch resources');
-      }
+                _context.next = 4;
+                return fetch(RESOURCES_URL);
 
-      _this.resources = JSON.parse(resourcesJson);
-    })();
-  }
-  /**
-   * Retrieves the remote path to the requested resource.
-   * @param {string} key
-   * @return {string} the Url
-   */
+              case 4:
+                resourceResponse = _context.sent;
+                _context.next = 7;
+                return resourceResponse.json();
 
+              case 7:
+                resources = _context.sent;
+                sessionStorage.setItem(SESSION_STORAGE_KEY, (0, _stringify.default)(resources));
+                this.fetchedResources = true;
+                _context.next = 17;
+                break;
 
-  getResource(key) {
-    var _this2 = this;
+              case 12:
+                if (!(resources === null && this.fetchedResources !== false)) {
+                  _context.next = 16;
+                  break;
+                }
 
-    return (0, _asyncToGenerator2.default)(function* () {
-      if (_this2.resources == null) {
-        yield _this2._setResources();
-      }
+                throw new Error('Unable to fetch resources');
 
-      if (_this2.resources.hasOwnProperty(key) !== true) {
-        throw new Error('Unknown resource requested');
-      }
+              case 16:
+                resources = JSON.parse(resources);
 
-      return _this2.resources[key];
-    })();
-  }
+              case 17:
+                this.resources = resources;
 
-}
+              case 18:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee, this);
+      }));
 
-var _default = new ResourceManager();
+      return function _setResources() {
+        return _setResources2.apply(this, arguments);
+      };
+    }()
+    /**
+     * Retrieves the remote path to the requested resource.
+     * @param {string} key
+     * @return {string} the Url
+     */
 
-exports.default = _default;
+  }, {
+    key: "getResource",
+    value: function () {
+      var _getResource = (0, _asyncToGenerator2.default)(
+      /*#__PURE__*/
+      _regenerator.default.mark(function _callee2(key) {
+        return _regenerator.default.wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                if (!(this.resources == null)) {
+                  _context2.next = 3;
+                  break;
+                }
+
+                _context2.next = 3;
+                return this._setResources();
+
+              case 3:
+                if (!(this.resources.endpoints.hasOwnProperty(key) !== true)) {
+                  _context2.next = 5;
+                  break;
+                }
+
+                throw new Error('Unknown resource requested');
+
+              case 5:
+                return _context2.abrupt("return", this.resources.endpoints[key]);
+
+              case 6:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2, this);
+      }));
+
+      return function getResource(_x) {
+        return _getResource.apply(this, arguments);
+      };
+    }()
+  }]);
+  return ResourceManager;
+}();
+
+var objResourceManager = new ResourceManager();
+exports.objResourceManager = objResourceManager;
+
+/***/ }),
+/* 83 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(84);
+
+/***/ }),
+/* 84 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var core = __webpack_require__(2);
+
+var $JSON = core.JSON || (core.JSON = {
+  stringify: JSON.stringify
+});
+
+module.exports = function stringify(it) {
+  // eslint-disable-line no-unused-vars
+  return $JSON.stringify.apply($JSON, arguments);
+};
 
 /***/ })
 /******/ ]);
-});

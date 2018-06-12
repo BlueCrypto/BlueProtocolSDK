@@ -74,7 +74,8 @@ blueSdk.scanLists('0x83D217450eB96F6247ff49d148409d4fEAf0405F')
 <a name="BlueProtocolSdk+analyzeContract"></a>
 
 ### blueProtocolSdk.analyzeContract(address) ⇒ [<code>Promise.&lt;AnalysisResult&gt;</code>](#AnalysisResult)
-A number of analyzers are run against the given contract's
+A number of analyzers are run against the given contract's opcodes scanning for patterns that indicate vulnerabilities.
+
 
 **Kind**: instance method of [<code>BlueProtocolSdk</code>](#BlueProtocolSdk)  
 
