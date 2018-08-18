@@ -7,6 +7,14 @@ Protocol Sdk.</p>
 </dd>
 </dl>
 
+## Functions
+
+<dl>
+<dt><a href="#getUtcDate">getUtcDate()</a> ⇒ <code>string</code></dt>
+<dd><p>Private method used to get current UTC date in Ymd format.</p>
+</dd>
+</dl>
+
 ## Typedefs
 
 <dl>
@@ -33,25 +41,42 @@ Protocol Sdk.
 **Kind**: global class  
 
 * [BlueProtocolSdk](#BlueProtocolSdk)
-    * [new BlueProtocolSdk(apiKey, network)](#new_BlueProtocolSdk_new)
-    * [.scanLists(address)](#BlueProtocolSdk+scanLists) ⇒ [<code>Promise.&lt;ListResult&gt;</code>](#ListResult)
-    * [.analyzeContract(address)](#BlueProtocolSdk+analyzeContract) ⇒ [<code>Promise.&lt;AnalysisResult&gt;</code>](#AnalysisResult)
+    * [new BlueProtocolSdk(apiKey, address, network)](#new_BlueProtocolSdk_new)
+    * [.sendRequest(message, signedMessage)](#BlueProtocolSdk+sendRequest) ⇒ <code>mixed</code>
+    * [.requestScanLists(address)](#BlueProtocolSdk+requestScanLists) ⇒ [<code>Promise.&lt;ListResult&gt;</code>](#ListResult)
+    * [.requestAnalyzeContract(address)](#BlueProtocolSdk+requestAnalyzeContract) ⇒ [<code>Promise.&lt;AnalysisResult&gt;</code>](#AnalysisResult)
 
 <a name="new_BlueProtocolSdk_new"></a>
 
-### new BlueProtocolSdk(apiKey, network)
+### new BlueProtocolSdk(apiKey, address, network)
 Constructor for the BlueProtocolSdk class.
 
 
 | Param | Type | Default | Description |
 | --- | --- | --- | --- |
 | apiKey | <code>string</code> |  | Your BlueProtocol SDK api key |
+| address | <code>string</code> |  | Your ethereum public address |
 | network | <code>string</code> | <code>&quot;mainnet&quot;</code> | (optional) defaults mainnet [rinkeby, ropsten] |
 
-<a name="BlueProtocolSdk+scanLists"></a>
+<a name="BlueProtocolSdk+sendRequest"></a>
 
-### blueProtocolSdk.scanLists(address) ⇒ [<code>Promise.&lt;ListResult&gt;</code>](#ListResult)
-Checks against a number of of community and Blue-maintained black and
+### blueProtocolSdk.sendRequest(message, signedMessage) ⇒ <code>mixed</code>
+Sends the given message and signature to the Blue Protocol SDK API and
+returns the response.
+
+**Kind**: instance method of [<code>BlueProtocolSdk</code>](#BlueProtocolSdk)  
+**Returns**: <code>mixed</code> - Depends on message parameter  
+
+| Param | Type |
+| --- | --- |
+| message | <code>Object</code> | 
+| signedMessage | <code>String</code> | 
+
+<a name="BlueProtocolSdk+requestScanLists"></a>
+
+### blueProtocolSdk.requestScanLists(address) ⇒ [<code>Promise.&lt;ListResult&gt;</code>](#ListResult)
+Returns the message used to request list scanning.
+Scans against a number of of community and Blue-maintained black and
 whitelists which identify known attackers, and verified recipients of
 funds and returns the results.
 
@@ -63,7 +88,14 @@ funds and returns the results.
 
 **Example**  
 ```js
-blueSdk.scanLists('0x83D217450eB96F6247ff49d148409d4fEAf0405F')
+let message = blueSdk.requestScanLists('0x83D217450eB96F6247ff49d148409d4fEAf0405F');
+
+// Signing is not provided by this package. The message is intended to be
+// signed by the wallet implementing this SDK.
+// below line is placeholder..
+let signedMessage = sign(message, privateKey);
+
+blueSdk.sendRequest(message, signedMessage)
 .then(result => {
     console.log(result)
 })
@@ -71,11 +103,10 @@ blueSdk.scanLists('0x83D217450eB96F6247ff49d148409d4fEAf0405F')
     console.error(err)
 })
 ```
-<a name="BlueProtocolSdk+analyzeContract"></a>
+<a name="BlueProtocolSdk+requestAnalyzeContract"></a>
 
-### blueProtocolSdk.analyzeContract(address) ⇒ [<code>Promise.&lt;AnalysisResult&gt;</code>](#AnalysisResult)
-A number of analyzers are run against the given contract's opcodes scanning for patterns that indicate vulnerabilities.
-
+### blueProtocolSdk.requestAnalyzeContract(address) ⇒ [<code>Promise.&lt;AnalysisResult&gt;</code>](#AnalysisResult)
+Returns the message used to request contract analysis.
 
 **Kind**: instance method of [<code>BlueProtocolSdk</code>](#BlueProtocolSdk)  
 
@@ -85,7 +116,14 @@ A number of analyzers are run against the given contract's opcodes scanning for 
 
 **Example**  
 ```js
-blueSdk.analyzeContract('0x83D217450eB96F6247ff49d148409d4fEAf0405F')
+let message = blueSdk.requestAnalyzeContract('0x83D217450eB96F6247ff49d148409d4fEAf0405F');
+
+// Signing is not provided by this package. The message is intended to be
+// signed by the wallet implementing this SDK.
+// below line is placeholder..
+let signedMessage = sign(message, privateKey);
+
+blueSdk.sendRequest(message, signedMessage)
 .then(result => {
     console.log(result)
 })
@@ -93,6 +131,12 @@ blueSdk.analyzeContract('0x83D217450eB96F6247ff49d148409d4fEAf0405F')
     console.error(err)
 })
 ```
+<a name="getUtcDate"></a>
+
+## getUtcDate() ⇒ <code>string</code>
+Private method used to get current UTC date in Ymd format.
+
+**Kind**: global function  
 <a name="ListResult"></a>
 
 ## ListResult : <code>Object</code>
@@ -134,7 +178,7 @@ The result of a call to the analyzeContract method.
 
 | Name | Type | Description |
 | --- | --- | --- |
-| score | <code>number</code> | The weighted score |
+| scan_status | <code>number</code> | [in_progress, complete] |
 | entries | [<code>Array.&lt;AnalysisResultEntry&gt;</code>](#AnalysisResultEntry) | The scan results |
 
 <a name="AnalysisResultEntry"></a>

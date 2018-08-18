@@ -1,4 +1,17 @@
-import {objResourceManager} from './ResourceManager';
+const blueSdkMessageEndpoint = 'https://scan.blueprotocol.com/v2/message';
+/**
+ * Private method used to get current UTC date in Ymd format.
+ *
+ * @return {string}
+ */
+const getUtcDate = function() {
+    let dateObj = new Date();
+    let month = dateObj.getUTCMonth() + 1;
+    let day = dateObj.getUTCDate();
+    let year = dateObj.getUTCFullYear();
+    return year + month + day;
+};
+// ---------------------------------------------------------------------------->
 /**
  * The BlueProtocolSdk class. Provides methods for interacting with the Blue
  * Protocol Sdk.
@@ -7,13 +20,42 @@ class BlueProtocolSdk {
     /**
      * Constructor for the BlueProtocolSdk class.
      * @param {string} apiKey - Your BlueProtocol SDK api key
+     * @param {string} address - Your ethereum public address
      * @param {string} network - (optional) defaults mainnet [rinkeby, ropsten]
+     *
      * @example
-     * const blueSdk = new BlueProtocolSdk(YOUR_API_KEY);
+     * const blueSdk = new BlueProtocolSdk(
+     *  YOUR_API_KEY,
+     *  YOUR_PUBLIC_ADDRESS
+     * );
      */
-    constructor(apiKey, network = 'mainnet') {
+    constructor(apiKey, address, network = 'mainnet') {
         this.apiKey = apiKey;
+        this.address = address;
         this.network = network;
+    }
+    // ------------------------------------------------------------------------>
+    /**
+     * Sends the given message and signature to the Blue Protocol SDK API and
+     * returns the response.
+     *
+     * @param {Object} message
+     *
+     * @param {String} signedMessage
+     *
+     * @return {mixed} Depends on message parameter
+     */
+    async sendRequest(message, signedMessage) {
+        const response = await fetch(blueSdkMessageEndpoint, {
+            headers: {
+                'Authorization': signedMessage,
+                'Content-Type': 'application/json'
+            },
+            method: 'POST',
+            body: JSON.stringify(message)
+        });
+
+        return await response.json();
     }
     // ------------------------------------------------------------------------>
     /**
@@ -35,14 +77,22 @@ class BlueProtocolSdk {
      * @property {string[]} addresses - addresses involved to entry
      */
     /**
-     * Checks against a number of of community and Blue-maintained black and
+     * Returns the message used to request list scanning.
+     * Scans against a number of of community and Blue-maintained black and
      * whitelists which identify known attackers, and verified recipients of
      * funds and returns the results.
      *
      * @param {string} address - The address you wish to check. Can be a public
      *                           address of an account or a contract.
      * @example
-     * blueSdk.scanLists('0x83D217450eB96F6247ff49d148409d4fEAf0405F')
+     * let message = blueSdk.requestScanLists('0x83D217450eB96F6247ff49d148409d4fEAf0405F');
+     *
+     * // Signing is not provided by this package. The message is intended to be
+     * // signed by the wallet implementing this SDK.
+     * // below line is placeholder..
+     * let signedMessage = sign(message, privateKey);
+     *
+     * blueSdk.sendRequest(message, signedMessage)
      * .then(result => {
      *     console.log(result)
      * })
@@ -51,10 +101,19 @@ class BlueProtocolSdk {
      * })
      * @return {Promise.<ListResult>}
      */
-    async scanLists(address) {
-        const scanlistsUrl = await objResourceManager.getResource('scanlists');
-        const response = await fetch(scanlistsUrl + address);
-        return await response.json();
+    requestScanLists(address) {
+        return {
+            'action': 'scanLists',
+            'arguments': {
+                'address': address
+            },
+            'context': {
+                'apiKey': this.apiKey,
+                'network': this.network,
+                'address': this.address,
+                'dateYmd': getUtcDate()
+            }
+        };
     }
     // ------------------------------------------------------------------------>
     /**
@@ -73,11 +132,19 @@ class BlueProtocolSdk {
      * @property {string} debug - Additional information related to entry
      */
     /**
-     * A number of analyzers are run against the given contract
+     * Returns the message used to request contract analysis.
      *
      * @param {string} address - The address of the contract you wish to analyze
+     *
      * @example
-     * blueSdk.analyzeContract('0x83D217450eB96F6247ff49d148409d4fEAf0405F')
+     * let message = blueSdk.requestAnalyzeContract('0x83D217450eB96F6247ff49d148409d4fEAf0405F');
+     *
+     * // Signing is not provided by this package. The message is intended to be
+     * // signed by the wallet implementing this SDK.
+     * // below line is placeholder..
+     * let signedMessage = sign(message, privateKey);
+     *
+     * blueSdk.sendRequest(message, signedMessage)
      * .then(result => {
      *     console.log(result)
      * })
@@ -86,10 +153,19 @@ class BlueProtocolSdk {
      * })
      * @return {Promise.<AnalysisResult>}
      */
-    async analyzeContract(address) {
-        const analyzecontractUrl = await objResourceManager.getResource('analyzecontract');
-        const response = await fetch(analyzecontractUrl + address);
-        return await response.json();
+    requestAnalyzeContract(address) {
+        return {
+            'action': 'analyzeContract',
+            'arguments': {
+                'address': address
+            },
+            'context': {
+                'apiKey': this.apiKey,
+                'network': this.network,
+                'address': this.address,
+                'dateYmd': getUtcDate()
+            }
+        };
     }
 }
 
