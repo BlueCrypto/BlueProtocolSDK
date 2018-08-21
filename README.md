@@ -1,14 +1,22 @@
 # BlueProtocolSDK
-This library provides methods for interacting with the Blue Protocol SDK using
-promises.
+This library provides methods for promise based interactions with the Blue 
+Protocol SDK. 
 
-The use of this library requires an API Key.
-You can request one by contacting us [HERE](https://www.blueprotocol.com/contact/).
+**Current Features**
+- Black listing of known attackers and whitelisting of verified recipients of funds
+- Cloud based static code analysis of Ethereum smart contracts
 
 ## Install
 ```bash
 npm install blueprotocolsdk
 ```
+
+## Requirements
+- API Key, You can request one by contacting us [here](https://www.blueprotocol.com/contact/).
+- Ability to sign message objects with an ethereum private key.
+
+Tested signing libraries
+- [ethjs-signer](https://github.com/ethjs/ethjs-signer/blob/HEAD/docs/user-guide.md)
 
 ## Usage
 ```js
@@ -34,6 +42,4 @@ blueSdk.sendRequest(message, signedMessage)
 })
 ```
 
-See [Documentation](#Documentation) for available methods.
-
-## [Documentation](./docs/BlueProtocolSdk.md)
+## [Full Documentation](https://github.com/BlueCrypto/BlueProtocolSDK/blob/master/docs/BlueProtocolSdk.md)

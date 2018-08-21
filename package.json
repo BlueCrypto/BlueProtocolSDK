@@ -1,8 +1,9 @@
 {
   "name": "blueprotocolsdk",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A wrapper library that provides methods for interacting with the Blue Protocol SDK.",
   "main": "src/index.js",
+  "homepage": "https://github.com/BlueCrypto/BlueProtocolSDK",
   "scripts": {
     "build": "webpack",
     "start:dev": "webpack-dev-server --progress --inline --hot --open"
